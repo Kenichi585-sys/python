@@ -35,24 +35,26 @@ def display_calendar(year, month):
         print()
 
 
-year = datetime.datetime.now().year
-month = datetime.datetime.now().month
+today = datetime.datetime.now()
+year, month = today.year, today.month
 
 
 if len(sys.argv) == 1:
     pass
     
-elif len(sys.argv) == 3 and sys.argv[1] == "-m":
-    try:
-        month = int(sys.argv[2])
-        
-        if month < 1 or month > 12:
-            print(f"{month} is neither a month number (1..12) nor a name")
-            sys.exit(1)
+elif len(sys.argv) == 3:
+    _, option, value = sys.argv
+    if option == "-m":
+        try:
+            month = int(value)
             
-    except ValueError:
-        print(f"{sys.argv[2]} is neither a month number (1..12) nor a name")
-        sys.exit(1)
+            if month < 1 or month > 12:
+                print(f"{month} is neither a month number (1..12) nor a name")
+                sys.exit(1)
+                
+        except ValueError:
+            print(f"{value} is neither a month number (1..12) nor a name")
+            sys.exit(1)
 
 
 display_calendar(year, month)
